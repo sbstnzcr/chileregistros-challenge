@@ -1,13 +1,17 @@
 import os
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
 import django
+
 django.setup()
 
-from bs4 import BeautifulSoup
-from snifa.models import Sancion, UnidadFiscalizable
+import json
 
 import requests
+from bs4 import BeautifulSoup
+
+from snifa.models import Sancion, UnidadFiscalizable
 
 URL = "https://snifa.sma.gob.cl/Sancionatorio/Resultado"
 
@@ -18,6 +22,7 @@ table = soup.find("table", id="myTable")
 tbody = table.find("tbody")
 rows = tbody.find_all("tr")
 
+data = []
 for row in rows:
     cells = row.find_all("td")
 
@@ -33,3 +38,17 @@ for row in rows:
         estado=cells[6].text.strip(),
         detalle_link=cells[7].find("a")["href"],
     )
+    data.append(
+        {
+            "expediente": sancion.expediente,
+            "unidad_fiscalizable": unidad_fiscalizable.nombre,
+            "nombre_razon_social": sancion.nombre_razon_social,
+            "categoria": sancion.categoria,
+            "region": sancion.region,
+            "estado": sancion.estado,
+            "detalle_link": sancion.detalle_link,
+        }
+    )
+
+with open("sanciones.json", "w") as file:
+    json.dump(data, file)
