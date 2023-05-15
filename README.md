@@ -69,13 +69,20 @@ This Django project demonstrates how to fetch data from an API and save it into 
 
 ## Usage
 
-1. Start the Django development server:
+1. Run the python scripts:
+
+   ```
+   python scipt_bikerio.py
+   python script_snifa.py
+   ```
+
+2. Start the Django development server:
 
    ```
    python manage.py runserver
    ```
 
-2. Open your web browser and navigate to `http://localhost:8000/admin` to access the django web admin interface.
+3. Open your web browser and navigate to `http://localhost:8000/admin` to access the django web admin interface.
 
 ## License
 
