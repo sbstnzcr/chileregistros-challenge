@@ -54,10 +54,18 @@ This Django project demonstrates how to fetch data from an API and save it into 
    python manage.py migrate
    ```
 
+7. Create a superuser:
+
+   ```
+   python manage.py createsuperuser
+   ```
+
+   Follow the prompts to enter a username, email (optional), and password for the superuser.
+
+
 ## Configuration
 
-1. Open the `.pg_pass` file and set your database connection string.
-2. Open the `.pg_service.conf` file and set your database variables.
+1. Open the `config/settings.py` file and set your own database connection variables.
 
 ## Usage
 
